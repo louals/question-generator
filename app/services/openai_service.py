@@ -6,8 +6,13 @@ import json
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+import random
+
 def generate_question(theme: str):
+    random_seed = random.randint(1, 1_000_000)
     prompt = f"""
+Seed: {random_seed}
+
 Generate a multiple-choice quiz question on the theme '{theme}' in this JSON format:
 
 {{
@@ -23,10 +28,9 @@ Rules:
 - Options should be shuffled
 - Keep difficulty: medium
 """
-
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
+        temperature=0.9,  # légèrement plus élevé
     )
     return json.loads(response.choices[0].message.content.strip())

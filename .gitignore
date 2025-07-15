@@ -1,0 +1,15 @@
+# .gitignore
+
+# Ignorer l'environnement virtuel Python
+venv/
+
+# Fichiers Python à ignorer
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers de config IDE (facultatif)
+.vscode/
+.idea/
+.
